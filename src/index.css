@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+@font-face {
+    font-family: font1;
+    font-style: normal;
+    font-weight: 300;
+    src: url("/fonts/Lausanne-300.woff2");
+}
+@font-face {
+    font-family: font2;
+    src: url("/fonts/Lausanne-500.woff2");
+    font-style: normal;
+    font-weight: 500;
+}
+
+::-webkit-scrollbar{
+    width: 5px;
+}
+::-webkit-scrollbar-thumb{
+    border-radius: 15px;
+    background-color: #D5F04D;
+}
+
+.nav-scroll{
+    animation-name: rightToLeft;
+    animation-duration:  10s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+@keyframes rightToLeft {
+    0%{
+        transform: translateX(0);
+    }
+    100%{
+        transform: translateX(-41%);
+    }
+}
+
+@theme{
+    --color-primary: #D5F04D;
+}
