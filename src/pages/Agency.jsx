@@ -31,7 +31,7 @@ const Agency = () => {
                 start: "top 15%",
                 end: "top -90%",
                 pin: true,
-                pinSpacing:true,
+                pinSpacing: true,
                 pinReparent: true,
                 pinType: "transform",
                 scrub: 1,
@@ -52,6 +52,7 @@ const Agency = () => {
         })
     })
     return (
+
         <div>
             <div className='section1'>
                 <div ref={imageDivRef} className='h-[20vw] absolute lg:top-[10vw] top-[30vh] overflow-hidden left-[25vw]  rounded-3xl w-[15vw]'>
@@ -70,6 +71,9 @@ const Agency = () => {
                 <div className=''><p>Our Culture_ We’re open to each other. Period. The team works together to create a space that makes us proud.
 
                 </p></div>
+            </div>
+            <div className=''>
+
             </div>
         </div>
     )
