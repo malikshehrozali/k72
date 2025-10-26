@@ -6,8 +6,8 @@ import { Link } from 'react-router-dom'
 
 const Header = () => {
 
-  const [openMenu, setOpenMenu] = useState(false)
-  useGSAP(() => {
+  const [openMenu, setOpenMenu] = useState(false);
+  const openAnimation = () => {
     const tl = gsap.timeline();
     tl.from(".stairing", {
       height: 0,
@@ -35,7 +35,76 @@ const Header = () => {
       zIndex: 0,
     });
 
+  }
+  const openAnimationReverse = () => {
+    const tl = gsap.timeline(); // Remove from DOM after animation completes
+    // Reset stairs display and position
+    tl.from(".menu",{
+    })
+    tl.set(".stairing", {
+      display: 'block',
+      y: "100%"
+    });
 
+    // Show stairs pad
+    tl.set(".stairspad", {
+      zIndex: 20,
+    });
+
+    // Animate stairs coming down
+    tl.to(".stairing", {
+      y: "0%",
+      stagger: {
+        amount: 0.5
+      }
+    });
+
+    // Hide menu links
+    tl.to(".link", {
+      rotateX: 90,
+      stagger: 0.05
+    }, "<");
+
+    // Hide menu
+    tl.to(".menu", {
+      y: "-100%",
+      duration: 0.5
+    });
+
+    // Animate stairs going up (closing)
+    tl.to(".stairing", {
+      height: 0,
+      stagger: {
+        amount: 0.5
+      }
+    });
+
+    // Reset stairs pad z-index
+    tl.set(".stairspad", {
+      zIndex: 0,
+    });
+  }
+
+  const handleMenuToggle = () => {
+    if (openMenu) {
+      // If menu is open, run close animation first
+      openAnimationReverse();
+      // Delay closing by 2 seconds (2000ms) - adjust this time as needed
+      setTimeout(() => {
+        setOpenMenu(false);
+      }, 2000);
+    } else {
+      // If menu is closed, open it immediately
+      setOpenMenu(true);
+    }
+  }
+
+  useGSAP(() => {
+    if (openMenu === true) {// Add to DOM immediately
+      openAnimation();
+    } else if (openMenu === false) {
+      openAnimationReverse(); // Play close animation, will remove from DOM when done
+    }
   }, [openMenu])
   return (
     <>
@@ -43,7 +112,7 @@ const Header = () => {
       <div className='w-full fixed z-10' >
         <div className='w-full flex h-[10vh] items-center justify-between'>
           <Link to={"/"} className='flex items-center pt-5 pl-5'>
-            <svg xmlns="http://www.w3.org/2000/svg" width="103" fill="white" height="44" viewBox="0 0 103 44">
+            <svg xmlns="http://www.w3.org/2000/svg" width="103" fill="black" height="44" viewBox="0 0 103 44">
               <path fill-rule="evenodd" d="M35.1441047,8.4486911 L58.6905011,8.4486911 L58.6905011,-1.3094819e-14 L35.1441047,-1.3094819e-14 L35.1441047,8.4486911 Z M20.0019577,0.000230366492 L8.83414254,25.3433089 L18.4876971,25.3433089 L29.5733875,0.000230366492 L20.0019577,0.000230366492 Z M72.5255345,0.000691099476 L72.5255345,8.44846073 L94.3991559,8.44846073 L94.3991559,16.8932356 L72.5275991,16.8932356 L72.5275991,19.5237906 L72.5255345,19.5237906 L72.5255345,43.9274346 L102.80937,43.9274346 L102.80937,35.4798953 L80.9357483,35.4798953 L80.9357483,25.3437696 L94.3996147,25.3428482 L94.3996147,16.8953089 L102.80937,16.8953089 L102.80937,0.000691099476 L72.5255345,0.000691099476 Z M-1.30398043e-14,43.9278953 L8.78642762,43.9278953 L8.78642762,0.0057591623 L-1.30398043e-14,0.0057591623 L-1.30398043e-14,43.9278953 Z M58.6849955,8.4486911 L43.1186904,43.9274346 L52.3166592,43.9274346 L67.9877996,8.4486911 L58.6849955,8.4486911 Z M18.4688864,25.3437696 L26.7045278,43.9278953 L36.2761871,43.9278953 L28.1676325,25.3375497 L18.4688864,25.3437696 Z"></path>
             </svg>
           </Link>
@@ -63,15 +132,14 @@ const Header = () => {
         {/* Navbar */}
         {openMenu &&
           <>
-
-            <div className='bg-black h-screen w-full fixed top-0 left-0 overflow-hidden menu z-10'>
+            <div className='bg-black h-screen w-full text-white fixed top-0 left-0 overflow-hidden menu z-10'>
               <div className='flex items-center'>
                 <Link to={"/"} className='flex items-center pt-5 pl-5'>
                   <svg xmlns="http://www.w3.org/2000/svg" width="103" fill="white" height="44" viewBox="0 0 103 44">
                     <path fill-rule="evenodd" d="M35.1441047,8.4486911 L58.6905011,8.4486911 L58.6905011,-1.3094819e-14 L35.1441047,-1.3094819e-14 L35.1441047,8.4486911 Z M20.0019577,0.000230366492 L8.83414254,25.3433089 L18.4876971,25.3433089 L29.5733875,0.000230366492 L20.0019577,0.000230366492 Z M72.5255345,0.000691099476 L72.5255345,8.44846073 L94.3991559,8.44846073 L94.3991559,16.8932356 L72.5275991,16.8932356 L72.5275991,19.5237906 L72.5255345,19.5237906 L72.5255345,43.9274346 L102.80937,43.9274346 L102.80937,35.4798953 L80.9357483,35.4798953 L80.9357483,25.3437696 L94.3996147,25.3428482 L94.3996147,16.8953089 L102.80937,16.8953089 L102.80937,0.000691099476 L72.5255345,0.000691099476 Z M-1.30398043e-14,43.9278953 L8.78642762,43.9278953 L8.78642762,0.0057591623 L-1.30398043e-14,0.0057591623 L-1.30398043e-14,43.9278953 Z M58.6849955,8.4486911 L43.1186904,43.9274346 L52.3166592,43.9274346 L67.9877996,8.4486911 L58.6849955,8.4486911 Z M18.4688864,25.3437696 L26.7045278,43.9278953 L36.2761871,43.9278953 L28.1676325,25.3375497 L18.4688864,25.3437696 Z"></path>
                   </svg>
                 </Link>
-                <button onClick={() => setOpenMenu(!openMenu)} className='text-white absolute -top-8 right-5 hover:text-primary font-normal cursor-pointer'><X width={200} strokeWidth={"0.5px"} height={200} /></button>
+                <button onClick={() => handleMenuToggle()} className='text-white absolute -top-8 right-5 hover:text-primary font-normal cursor-pointer'><X width={200} strokeWidth={"0.5px"} height={200} /></button>
               </div>
               <div className='w-full h-screen flex flex-col items-center -pt-[30vw] justify-center uppercase'>
                 <Link to={"/work"} className='bg-black w-screen h-1/7 border-y-2 flex items-center justify-center hover:border-none border-white text-center group link'>
@@ -139,7 +207,7 @@ const Header = () => {
             </div>
             <div className='w-screen h-screen fixed flex top-0 stairspad'>
               <div className='stairing h-full w-1/5 bg-black '></div>
-              <div className='stairing h-full w-1/5 bg-white '></div>
+              <div className='stairing h-full w-1/5 bg-black '></div>
               <div className='stairing h-full w-1/5 bg-black '></div>
               <div className='stairing h-full w-1/5 bg-black '></div>
               <div className='stairing h-full w-1/5 bg-black '></div>
