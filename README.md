@@ -46,18 +46,63 @@ npx http-server
 
 ```
 k72-clone/
-│
-├── index.html          # Main HTML file
-├── css/
-│   ├── style.css      # Main stylesheet
-│   └── animations.css # Animation definitions
-├── js/
-│   ├── main.js        # Main JavaScript file
-│   └── animations.js  # Animation controllers
-├── assets/
-│   ├── images/        # Image assets
-│   └── icons/         # Icon files
-└── README.md          # Project documentation
+└── 📁public
+        └── 📁fonts
+            ├── Lausanne-300.woff2
+            ├── Lausanne-500.woff2
+        ├── bag on top.jpg
+        ├── bg-video.mp4
+        ├── CAMILLE
+        ├── Carl
+        ├── ChantalG.jpg
+        ├── Claire
+        ├── fingers shaking
+        ├── gossings.gif
+        ├── HugoJoseph
+        ├── icon.png
+        ├── Isa
+        ├── joel
+        ├── Lawrence.jpg
+        ├── logo.svg
+        ├── man on wheels.jpg
+        ├── MAXIME
+        ├── MEGGIE
+        ├── MEL
+        ├── MenuThumbnail
+        ├── Michele
+        ├── MyleneS
+        ├── Olivier.jpg
+        ├── SophieA
+    └── 📁src
+        └── 📁components
+            └── 📁agency
+            └── 📁common
+                ├── Stair.jsx
+            └── 📁Contacts
+            └── 📁home
+                ├── Header.jsx
+                ├── HomeBottomText.jsx
+                ├── HomeHeroText.jsx
+                ├── Video.jsx
+            └── 📁projects
+                ├── ProjectCard.jsx
+        └── 📁pages
+            ├── Agency.jsx
+            ├── Blog.jsx
+            ├── Contact.jsx
+            ├── Home.jsx
+            ├── NotFound.jsx
+            ├── Work.jsx
+        ├── App.jsx
+        ├── index.css
+        ├── main.jsx
+    ├── .gitignore
+    ├── eslint.config.js
+    ├── index.html
+    ├── package-lock.json
+    ├── package.json
+    ├── README.md
+    └── vite.config.js
 ```
 
 ## 🎯 Key Animation Features
